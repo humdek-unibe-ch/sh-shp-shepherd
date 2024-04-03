@@ -13,6 +13,8 @@ class ShepherdJSView extends StyleView
 {
     /* Private Properties *****************************************************/
 
+    private $steps;
+
     /* Constructors ***********************************************************/
 
     /**
@@ -26,6 +28,7 @@ class ShepherdJSView extends StyleView
     public function __construct($model, $controller)
     {
         parent::__construct($model, $controller);
+        $this->steps = $this->model->get_db_field('steps');
     }
 
 
@@ -36,6 +39,9 @@ class ShepherdJSView extends StyleView
      */
     public function output_content()
     {
+        $shepherd_data = array();
+        $shepherd_data['is_cms'] = $this->model->is_cms_page();
+        $shepherd_data['steps'] = $this->steps;
         require __DIR__ . "/tpl_shepherdJS.php";
     }
 
@@ -64,7 +70,7 @@ class ShepherdJSView extends StyleView
                     __DIR__ . "/js/2_shepherdJS.js",
                 );
             } else {
-                $local = array(__DIR__ . "/../../../../js/ext/shepherd.min.js?v=" .$this->model->get_services()->get_db()->get_git_version(__DIR__));
+                $local = array(__DIR__ . "/../../../../js/ext/shepherd.min.js?v=" . $this->model->get_services()->get_db()->get_git_version(__DIR__));
             }
         }
         return parent::get_js_includes($local);
