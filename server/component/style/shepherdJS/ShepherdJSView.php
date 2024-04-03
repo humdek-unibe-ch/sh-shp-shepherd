@@ -61,6 +61,7 @@ class ShepherdJSView extends StyleView
             if (DEBUG) {
                 $local = array(
                     __DIR__ . "/js/1_shepherd.min.js",
+                    __DIR__ . "/js/2_shepherdJS.js",
                 );
             } else {
                 $local = array(__DIR__ . "/../../../../js/ext/shepherd.min.js?v=" .$this->model->get_services()->get_db()->get_git_version(__DIR__));
