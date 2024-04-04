@@ -10,13 +10,7 @@ function initShepherd(shepherd_element) {
     console.log($shepherd_data);
     if (!$shepherd_data['is_cms']) {
         // if not cms load it
-        const tour = new Shepherd.Tour({
-            useModalOverlay: true,
-            defaultStepOptions: {
-                classes: 'shadow-md bg-purple-dark',
-                scrollTo: true
-            }
-        });
+        const tour = new Shepherd.Tour($shepherd_data['options']);
         // load steps
         $shepherd_data['steps'].forEach(step => {
             step.buttons.forEach(button => {

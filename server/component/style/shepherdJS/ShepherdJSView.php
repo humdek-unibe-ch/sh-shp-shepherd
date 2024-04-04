@@ -13,7 +13,15 @@ class ShepherdJSView extends StyleView
 {
     /* Private Properties *****************************************************/
 
+    /**
+     * Array which contain `JSON` objects. Each object is a shepherd [step](https://shepherdjs.dev/docs/Step.html).
+     */
     private $steps;
+
+    /**
+     * `JSON` configuration for the [tour](https://shepherdjs.dev/docs/Tour.html).
+     */
+    private $options;
 
     /* Constructors ***********************************************************/
 
@@ -29,6 +37,7 @@ class ShepherdJSView extends StyleView
     {
         parent::__construct($model, $controller);
         $this->steps = $this->model->get_db_field('steps');
+        $this->options = $this->model->get_db_field('options');
     }
 
 
@@ -42,6 +51,7 @@ class ShepherdJSView extends StyleView
         $shepherd_data = array();
         $shepherd_data['is_cms'] = $this->model->is_cms_page();
         $shepherd_data['steps'] = $this->steps;
+        $shepherd_data['options'] = $this->options;
         require __DIR__ . "/tpl_shepherdJS.php";
     }
 

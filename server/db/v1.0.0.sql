@@ -10,7 +10,7 @@ INSERT IGNORE INTO `styles_fields` (`id_styles`, `id_fields`, `default_value`, `
 INSERT IGNORE INTO `styles_fields` (`id_styles`, `id_fields`, `default_value`, `help`) VALUES (get_style_id('shepherdJS'), get_field_id('data_config'), '', 'Define data configuration for fields that are loaded from DB and can be used inside the style with their param names. The name of the field can be used between {{param_name}} to load the required value');
 
 INSERT IGNORE INTO `fields` (`id`, `name`, `id_type`, `display`) VALUES (NULL, 'steps', get_field_type_id('json'), '1');
-INSERT IGNORE INTO `styles_fields` (`id_styles`, `id_fields`, `default_value`, `help`) VALUES (get_style_id('shepherdJS'), get_field_id('steps'), '', 'Array which contain `JSON` objects. Each object is a shephered [step](https://shepherdjs.dev/docs/Step.html). Example: 
+INSERT IGNORE INTO `styles_fields` (`id_styles`, `id_fields`, `default_value`, `help`) VALUES (get_style_id('shepherdJS'), get_field_id('steps'), '', 'Array which contain `JSON` objects. Each object is a shepherd [step](https://shepherdjs.dev/docs/Step.html). Example: 
 ```
 [
 	{
@@ -44,5 +44,19 @@ INSERT IGNORE INTO `styles_fields` (`id_styles`, `id_fields`, `default_value`, `
 		]
 	}
 ]
+```
+');
+
+INSERT IGNORE INTO `fields` (`id`, `name`, `id_type`, `display`) VALUES (NULL, 'options', get_field_type_id('json'), '1');
+INSERT IGNORE INTO `styles_fields` (`id_styles`, `id_fields`, `default_value`, `help`) VALUES (get_style_id('shepherdJS'), get_field_id('options'), '', '`JSON` configuration for the [tour](https://shepherdjs.dev/docs/Tour.html). Example: 
+```
+{
+  "useModalOverlay": false,
+  "defaultStepOptions": {
+    "classes": "shadow-md bg-purple-dark",
+    "scrollTo": true
+  }
+}
+
 ```
 ');
