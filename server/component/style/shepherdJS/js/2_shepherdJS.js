@@ -8,6 +8,12 @@ jQuery(document).ready(function () {
 function initShepherd(shepherd_element) {
     $shepherd_data = $(shepherd_element).data('shepherd');
     console.log($shepherd_data);
+    var tourName = $shepherd_data['options']['tourName'];
+    var currentShepherdState = {};
+    if (window.localStorage.getItem(tourName)) {
+        currentShepherdState = JSON.parse(window.localStorage.getItem(tourName));
+    }
+    console.log(tourName);
     if (!$shepherd_data['is_cms']) {
         // if not cms load it
         const tour = new Shepherd.Tour($shepherd_data['options']);
@@ -31,7 +37,23 @@ function initShepherd(shepherd_element) {
             });
             console.log(step);
             tour.addStep(step);
-        });
+        });        
+
         tour.start();
+        if (currentShepherdState['step_index'] != undefined) {
+            tour.show(currentShepherdState['step_index']);
+
+        } 
+
+        // Listen for when a step changes and update the stored step index
+        tour.on('show', function (event) {
+            if (tourName && currentShepherdState) {
+                console.log(event);
+                currentShepherdState['step_index'] = event.tour.steps.indexOf(event.tour.currentStep) + 1;
+                window.localStorage.setItem(tourName, JSON.stringify(currentShepherdState));
+                console.log('store', JSON.stringify(currentShepherdState));
+                console.log('storeObj', currentShepherdState);
+            }
+        });
     }
 }

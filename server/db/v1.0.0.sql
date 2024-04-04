@@ -47,15 +47,16 @@ INSERT IGNORE INTO `styles_fields` (`id_styles`, `id_fields`, `default_value`, `
 ```
 ');
 
-INSERT IGNORE INTO `fields` (`id`, `name`, `id_type`, `display`) VALUES (NULL, 'options', get_field_type_id('json'), '1');
+INSERT IGNORE INTO `fields` (`id`, `name`, `id_type`, `display`) VALUES (NULL, 'options', get_field_type_id('json'), '0');
 INSERT IGNORE INTO `styles_fields` (`id_styles`, `id_fields`, `default_value`, `help`) VALUES (get_style_id('shepherdJS'), get_field_id('options'), '', '`JSON` configuration for the [tour](https://shepherdjs.dev/docs/Tour.html). Example: 
 ```
 {
   "useModalOverlay": false,
   "defaultStepOptions": {
     "classes": "shadow-md bg-purple-dark",
-    "scrollTo": true
-  }
+    "scrollTo": true    
+  },
+  "tourName": "shepherd-tour-name"
 }
 
 ```
