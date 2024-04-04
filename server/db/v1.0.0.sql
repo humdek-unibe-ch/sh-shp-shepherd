@@ -40,6 +40,10 @@ INSERT IGNORE INTO `styles_fields` (`id_styles`, `id_fields`, `default_value`, `
 			{
 				"text": "Back",
 				"action": "tour.back"
+			},
+            {
+				"text": "Finish",
+				"action": "tour.complete"
 			}
 		]
 	}
@@ -61,3 +65,7 @@ INSERT IGNORE INTO `styles_fields` (`id_styles`, `id_fields`, `default_value`, `
 
 ```
 ');
+
+-- add field show_once to style shepherdJS
+INSERT IGNORE INTO `fields` (`id`, `name`, `id_type`, `display`) VALUES (NULL, 'show_once', get_field_type_id('checkbox'), '0');
+INSERT IGNORE INTO `styles_fields` (`id_styles`, `id_fields`, `default_value`, `help`) VALUES (get_style_id('shepherdJS'), get_field_id('show_once'), 1, 'If enabled the tutorial tour will be shown only once. When the tour is completed the status will be changed to finished and it will not be shown anymore for the user. If the user is not logged in and is as a guest, the state is kept in the `localStorage`. If the local storage is cleared then the user can see the tutorial again.');
