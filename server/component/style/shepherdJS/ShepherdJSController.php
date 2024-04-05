@@ -25,6 +25,9 @@ class ShepherdJSController extends BaseController
     public function __construct($model)
     {
         parent::__construct($model);
+        if (isset($_POST['trigger_type']) && isset($_POST['id_users']) && $_POST['id_users'] = $_SESSION['id_user']) {
+            $this->model->save_shepherd($_POST);
+        }
     }
 
     /* Private Methods ********************************************************/

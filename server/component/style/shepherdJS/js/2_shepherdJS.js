@@ -1,17 +1,35 @@
 jQuery(document).ready(function () {
-    console.log('shepherd js loaded');
     $('.selfhelp-shepherd').each(function () {
         initShepherd(this);
     });
 });
 
+/**
+ * Initialize Shepherd tour.
+ * @param {HTMLElement} shepherd_element - The element that triggers the Shepherd tour.
+ */
 function initShepherd(shepherd_element) {
     var shepherd_data = $(shepherd_element).data('shepherd');
-    console.log(shepherd_data);
     var tourName = shepherd_data['options']['tourName'];
-    var currentShepherdState = {};
+    var currentShepherdState = {
+        "tourName": tourName,
+        "id_users": shepherd_data['id_users']
+    };
     if (window.localStorage.getItem(tourName)) {
         currentShepherdState = JSON.parse(window.localStorage.getItem(tourName));
+    }
+    if (shepherd_data['state']) {
+        // use the one form DB, if it exist
+        currentShepherdState = shepherd_data['state'];
+    }
+    if (shepherd_data['show_once'] == "0" && currentShepherdState['trigger_type'] === 'finished') {
+        // it was finished, but it can be done multiple times
+        // reset
+        currentShepherdState = {
+            "tourName": tourName,
+            "id_users": shepherd_data['id_users'],
+            "trigger_type": "updated" // set it with status updated, because the entry is already in DB
+        };
     }
     if (shepherd_data['show_once'] == "1" && currentShepherdState['trigger_type'] === 'finished') {
         return;
@@ -22,7 +40,6 @@ function initShepherd(shepherd_element) {
         // load steps
         shepherd_data['steps'].forEach(step => {
             step.buttons.forEach(button => {
-                console.log(button.action);
                 if (button.action) {
                     if (button.action.includes('next')) {
                         button.action = tour.next;
@@ -33,13 +50,11 @@ function initShepherd(shepherd_element) {
                     } else {
                         button['orig_action'] = button['action'];
                         button.action = () => {
-                            console.log('Wrong action for step:', step);
                             alert('Wrong action, check the console log for more information!');
                         };
                     }
                 }
             });
-            console.log(step);
             tour.addStep(step);
         });
 
@@ -49,29 +64,40 @@ function initShepherd(shepherd_element) {
         }
 
         // Listen for when a step changes and update the stored step index
-        tour.on('show', function (event) {
+        tour.on('show', function () {
             if (tourName && currentShepherdState) {
-                currentShepherdState['step_index'] = event.tour.steps.indexOf(event.tour.currentStep) + 1;
+                currentShepherdState['step_index'] = tour.steps.indexOf(tour.currentStep) + 1;
                 if (!currentShepherdState['trigger_type']) {
                     currentShepherdState['trigger_type'] = 'started';
                 } else if (currentShepherdState['trigger_type'] !== 'finished') {
                     currentShepherdState['trigger_type'] = 'updated';
                 }
-                window.localStorage.setItem(tourName, JSON.stringify(currentShepherdState));
+                saveShepherdState(currentShepherdState);
             }
         });
 
         // Catch the complete event
         tour.on('complete', function () {
-            // Your code to execute when the tour is complete
-            if (shepherd_data['show_once'] == "1") {
-                // keep the state that is finished
-                currentShepherdState['trigger_type'] = 'finished';
-                window.localStorage.setItem(tourName, JSON.stringify(currentShepherdState));
-            } else {
-                // clear the state
-                window.localStorage.removeItem(tourName);
-            }
+            currentShepherdState['trigger_type'] = 'finished';
+            saveShepherdState(currentShepherdState);
+        });
+    }
+}
+
+/**
+ * Saves the state of the Shepherd tour to localStorage and optionally sends it to the server.
+ * @param {Object} currentShepherdState - The state object to be saved.
+ * @param {string} currentShepherdState.tourName - The name of the tour.
+ * @param {number} [currentShepherdState.id_users] - The ID of the user (optional).
+ */
+function saveShepherdState(currentShepherdState) {
+    window.localStorage.setItem(currentShepherdState["tourName"], JSON.stringify(currentShepherdState));
+    if (currentShepherdState['id_users'] && currentShepherdState['id_users'] > 1) {
+        // save for the user
+        $.ajax({
+            type: 'post',
+            url: window.location,
+            data: currentShepherdState
         });
     }
 }

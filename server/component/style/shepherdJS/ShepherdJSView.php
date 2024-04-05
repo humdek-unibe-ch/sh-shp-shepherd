@@ -59,6 +59,12 @@ class ShepherdJSView extends StyleView
         $shepherd_data['steps'] = $this->steps;
         $shepherd_data['options'] = $this->options;
         $shepherd_data['show_once'] = $this->show_once;
+        $shepherd_data['id_users'] = intval($_SESSION['id_user']);
+        $shepherd_data['state'] = $this->model->get_shepherd_state();
+        if ($shepherd_data['state'] && $shepherd_data['state']['state']) {
+            // load only the state, leave the rest, not needed now
+            $shepherd_data['state'] = $shepherd_data['state']['state'];
+        }
         require __DIR__ . "/tpl_shepherdJS.php";
     }
 
