@@ -28,6 +28,11 @@ class ShepherdJSView extends StyleView
      */
     private $show_once;
 
+    /**
+     * Enabling `use_javascript`, button actions string will cause them to be converted to JavaScript using the `eval()` function. Make sure that the provided strings are safe and do not pose a security risk.
+     */
+    private $use_javascript;
+
     /* Constructors ***********************************************************/
 
     /**
@@ -44,6 +49,7 @@ class ShepherdJSView extends StyleView
         $this->steps = $this->model->get_db_field('steps');
         $this->options = $this->model->get_db_field('options');
         $this->show_once = $this->model->get_db_field('show_once', 1);
+        $this->use_javascript = $this->model->get_db_field('use_javascript', 0);
     }
 
 
@@ -59,6 +65,7 @@ class ShepherdJSView extends StyleView
         $shepherd_data['steps'] = $this->steps;
         $shepherd_data['options'] = $this->options;
         $shepherd_data['show_once'] = $this->show_once;
+        $shepherd_data['use_javascript'] = $this->use_javascript;
         $shepherd_data['id_users'] = intval($_SESSION['id_user']);
         $shepherd_data['state'] = $this->model->get_shepherd_state();
         if ($shepherd_data['state'] && $shepherd_data['state']['state']) {

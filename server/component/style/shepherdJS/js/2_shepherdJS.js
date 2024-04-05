@@ -41,17 +41,26 @@ function initShepherd(shepherd_element) {
         shepherd_data['steps'].forEach(step => {
             step.buttons.forEach(button => {
                 if (button.action) {
-                    if (button.action.includes('next')) {
-                        button.action = tour.next;
-                    } else if (button.action.includes('back')) {
-                        button.action = tour.back;
-                    } else if (button.action.includes('complete')) {
-                        button.action = tour.complete;
+                    $('.style-section-277').trigger( 'click' );
+                    if (shepherd_data['use_javascript'] == "1") {
+                        try {
+                            button.action = eval(button.action);
+                        } catch (error) {
+                            console.log('Wrong code for: ', button.action, error);
+                        }
                     } else {
-                        button['orig_action'] = button['action'];
-                        button.action = () => {
-                            alert('Wrong action, check the console log for more information!');
-                        };
+                        if (button.action.includes('next')) {
+                            button.action = tour.next;
+                        } else if (button.action.includes('back')) {
+                            button.action = tour.back;
+                        } else if (button.action.includes('complete')) {
+                            button.action = tour.complete;
+                        } else {
+                            button['orig_action'] = button['action'];
+                            button.action = () => {
+                                alert('Wrong action, check the console log for more information!');
+                            };
+                        }
                     }
                 }
             });

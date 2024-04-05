@@ -69,3 +69,10 @@ INSERT IGNORE INTO `styles_fields` (`id_styles`, `id_fields`, `default_value`, `
 -- add field show_once to style shepherdJS
 INSERT IGNORE INTO `fields` (`id`, `name`, `id_type`, `display`) VALUES (NULL, 'show_once', get_field_type_id('checkbox'), '0');
 INSERT IGNORE INTO `styles_fields` (`id_styles`, `id_fields`, `default_value`, `help`) VALUES (get_style_id('shepherdJS'), get_field_id('show_once'), 1, 'If enabled the tutorial tour will be shown only once. When the tour is completed the status will be changed to finished and it will not be shown anymore for the user. If the user is not logged in and is as a guest, the state is kept in the `localStorage`. If the local storage is cleared then the user can see the tutorial again.');
+
+-- register hook get_csp_rules
+INSERT IGNORE INTO `hooks` (`id_hookTypes`, `name`, `description`, `class`, `function`, `exec_class`, `exec_function`, `priority`) VALUES ((SELECT id FROM lookups WHERE lookup_code = 'hook_overwrite_return' LIMIT 0,1), 'shepherd-js-addCspRule', 'Add csp rule for ShepherdJS', 'BasePage', 'getCspRules', 'ShepherdJSHooks', 'setCspRules', 1);
+
+-- add field use_javascript to style shepherdJS
+INSERT IGNORE INTO `fields` (`id`, `name`, `id_type`, `display`) VALUES (NULL, 'use_javascript', get_field_type_id('checkbox'), '0');
+INSERT IGNORE INTO `styles_fields` (`id_styles`, `id_fields`, `default_value`, `help`) VALUES (get_style_id('shepherdJS'), get_field_id('use_javascript'), 0, 'Enabling `use_javascript`, button actions string will cause them to be converted to JavaScript using the `eval()` function. Make sure that the provided strings are safe and do not pose a security risk.');
