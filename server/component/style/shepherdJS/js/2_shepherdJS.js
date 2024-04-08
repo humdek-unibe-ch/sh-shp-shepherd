@@ -20,7 +20,7 @@ function initShepherd(shepherd_element) {
     }
     if (shepherd_data['state']) {
         // use the one form DB, if it exist
-        currentShepherdState = shepherd_data['state'];
+        // currentShepherdState = shepherd_data['state'];
     }
     if (shepherd_data['show_once'] == "0" && currentShepherdState['trigger_type'] === 'finished') {
         // it was finished, but it can be done multiple times
@@ -41,7 +41,6 @@ function initShepherd(shepherd_element) {
         shepherd_data['steps'].forEach(step => {
             step.buttons.forEach(button => {
                 if (button.action) {
-                    $('.style-section-277').trigger( 'click' );
                     if (shepherd_data['use_javascript'] == "1") {
                         try {
                             button.action = eval(button.action);
@@ -73,9 +72,9 @@ function initShepherd(shepherd_element) {
         }
 
         // Listen for when a step changes and update the stored step index
-        tour.on('show', function () {
+        tour.on('show', function (event) {
             if (tourName && currentShepherdState) {
-                currentShepherdState['step_index'] = tour.steps.indexOf(tour.currentStep) + 1;
+                currentShepherdState['step_index'] = event.tour.steps.indexOf(event.step);
                 if (!currentShepherdState['trigger_type']) {
                     currentShepherdState['trigger_type'] = 'started';
                 } else if (currentShepherdState['trigger_type'] !== 'finished') {
@@ -90,6 +89,7 @@ function initShepherd(shepherd_element) {
             currentShepherdState['trigger_type'] = 'finished';
             saveShepherdState(currentShepherdState);
         });
+
     }
 }
 
