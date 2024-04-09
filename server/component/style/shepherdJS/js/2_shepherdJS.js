@@ -15,6 +15,7 @@ function initShepherd(shepherd_element) {
         "tourName": tourName,
         "id_users": shepherd_data['id_users']
     };
+    $(shepherd_element).removeAttr('data-shepherd');
     if (window.localStorage.getItem(tourName)) {
         currentShepherdState = JSON.parse(window.localStorage.getItem(tourName));
     }
