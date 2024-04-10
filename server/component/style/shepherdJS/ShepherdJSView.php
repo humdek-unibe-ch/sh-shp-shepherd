@@ -81,6 +81,11 @@ class ShepherdJSView extends StyleView
     public function output_content_mobile()
     {
         $style = parent::output_content_mobile();
+        $state = $this->model->get_shepherd_state();
+        if ($state && $state['state']) {
+            // load only the state, leave the rest, not needed now
+            $style['state'] = $state['state'];
+        }
         return $style;
     }
 
