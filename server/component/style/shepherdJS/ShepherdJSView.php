@@ -66,10 +66,12 @@ class ShepherdJSView extends StyleView
         $shepherd_data['options'] = $this->options;
         $shepherd_data['show_once'] = $this->show_once;
         $shepherd_data['use_javascript'] = $this->use_javascript;
+        $shepherd_data['page_keyword'] = $this->model->get_services()->get_router()->get_keyword_from_url();
+        $shepherd_data['last_url'] = $this->model->get_services()->get_router()->get_url('#'.$shepherd_data['page_keyword']);
         $shepherd_data['state'] = $this->model->get_shepherd_state();
         if ($shepherd_data['state'] && $shepherd_data['state']['state']) {
             // load only the state, leave the rest, not needed now
-            $shepherd_data['state'] = $shepherd_data['state']['state'];
+            $shepherd_data['state'] = $shepherd_data['state']['state'];            
         }
         require __DIR__ . "/tpl_shepherdJS.php";
     }

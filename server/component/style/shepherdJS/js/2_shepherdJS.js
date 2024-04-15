@@ -15,12 +15,17 @@ function initShepherd(shepherd_element) {
         "tourName": tourName
     };
     $(shepherd_element).removeAttr('data-shepherd');
+    var last_url;
     if (window.localStorage.getItem(tourName)) {
         currentShepherdState = JSON.parse(window.localStorage.getItem(tourName));
+        if (currentShepherdState['last_url']) {
+            last_url = currentShepherdState['last_url'];
+        }
     }
-    if (shepherd_data['state']) {
+    if (shepherd_data['state'] && shepherd_data['state']['trigger_type']) {
         // use the one form DB, if it exist
-        // currentShepherdState = shepherd_data['state'];
+        // use only the trigger_type, if it was finished;
+        currentShepherdState['trigger_type'] = shepherd_data['state']['trigger_type'];
     }
     if (shepherd_data['show_once'] == "0" && currentShepherdState['trigger_type'] === 'finished') {
         // it was finished, but it can be done multiple times
@@ -34,6 +39,12 @@ function initShepherd(shepherd_element) {
         return;
     }
     if (!shepherd_data['is_cms']) {
+        if (last_url && last_url != shepherd_data['last_url']) {
+            window.location.href = last_url;
+            return;
+        }
+        currentShepherdState['page_keyword'] = shepherd_data['page_keyword'];
+        currentShepherdState['last_url'] = shepherd_data['last_url'];
         // if not cms load it
         const tour = new Shepherd.Tour(shepherd_data['options']);
         // load steps
@@ -72,6 +83,7 @@ function initShepherd(shepherd_element) {
 
         // Listen for when a step changes and update the stored step index
         tour.on('show', function (event) {
+            delete currentShepherdState['last_url'];
             if (tourName && currentShepherdState) {
                 currentShepherdState['step_index'] = event.tour.steps.indexOf(event.step);
                 if (!currentShepherdState['trigger_type']) {
@@ -90,6 +102,7 @@ function initShepherd(shepherd_element) {
         });
 
     }
+    saveShepherdState(currentShepherdState);
 }
 
 /**
