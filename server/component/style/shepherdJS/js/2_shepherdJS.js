@@ -12,8 +12,7 @@ function initShepherd(shepherd_element) {
     var shepherd_data = $(shepherd_element).data('shepherd');
     var tourName = shepherd_data['options']['tourName'];
     var currentShepherdState = {
-        "tourName": tourName,
-        "id_users": shepherd_data['id_users']
+        "tourName": tourName
     };
     $(shepherd_element).removeAttr('data-shepherd');
     if (window.localStorage.getItem(tourName)) {
@@ -28,7 +27,6 @@ function initShepherd(shepherd_element) {
         // reset
         currentShepherdState = {
             "tourName": tourName,
-            "id_users": shepherd_data['id_users'],
             "trigger_type": "updated" // set it with status updated, because the entry is already in DB
         };
     }
@@ -98,16 +96,13 @@ function initShepherd(shepherd_element) {
  * Saves the state of the Shepherd tour to localStorage and optionally sends it to the server.
  * @param {Object} currentShepherdState - The state object to be saved.
  * @param {string} currentShepherdState.tourName - The name of the tour.
- * @param {number} [currentShepherdState.id_users] - The ID of the user (optional).
  */
 function saveShepherdState(currentShepherdState) {
     window.localStorage.setItem(currentShepherdState["tourName"], JSON.stringify(currentShepherdState));
-    if (currentShepherdState['id_users'] && currentShepherdState['id_users'] > 1) {
-        // save for the user
-        $.ajax({
-            type: 'post',
-            url: window.location,
-            data: currentShepherdState
-        });
-    }
+    // save for the user
+    $.ajax({
+        type: 'post',
+        url: window.location,
+        data: currentShepherdState
+    });
 }
