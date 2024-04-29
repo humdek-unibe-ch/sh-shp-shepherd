@@ -48,7 +48,7 @@ class ShepherdJSModel extends StyleModel
      */
     private function prepare_data($data)
     {
-        if (!$data['tourName']) {
+        if (!$data || !isset($data['tourName']) || !$data['tourName']) {
             return false;
         }
         $tourName = $data['tourName'];

@@ -83,6 +83,8 @@ class ShepherdJSView extends StyleView
     {
         $style = parent::output_content_mobile();
         $state = $this->model->get_shepherd_state();
+        $style['page_keyword'] = $this->model->get_services()->get_router()->get_keyword_from_url();
+        $style['last_url'] = $this->model->get_services()->get_router()->get_url('#'.$style['page_keyword']);
         if ($state && $state['state']) {
             // load only the state, leave the rest, not needed now
             $style['state'] = $state['state'];
