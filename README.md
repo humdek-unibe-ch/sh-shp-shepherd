@@ -15,10 +15,15 @@ This is a SelfHelpPlugin that is used for [ShepherdJS](https://shepherdjs.dev) i
 Insert style `shepherdJS` on the page where you want to show a Tour
 
 ## Define [steps](https://shepherdjs.dev/docs/Step.html)
-Create a series of steps for your tour, each containing descriptive text and instructions for the user. These steps should be defined as JSON objects. Each step should include an `id`, `text` describing the step, `attachTo` specifying the element to which the step should be attached, `canClickTarget` indicating if the target can be clicked, `classes` for styling, and `buttons` defining any action buttons.
+Create a series of steps for your tour, each containing descriptive text and instructions for the user. These steps should be defined as JSON objects. Each step should include an `id`, `text` describing the step, `attachTo` specifying the element to which the step should be attached, `canClickTarget` indicating if the target can be clicked, `classes` for styling, and `buttons` defining any action buttons. 
+
+For actions in steps, the style accepts: `tour.back`, `tour.next`, `tour.complete` without `java_script` enabled. If you need specific actions with `javascript`, the `java_script` property should be enabled. Check the examples for such actions. The functions for `mobile` and `web` are different
 
 ## Set [options](https://shepherdjs.dev/docs/Tour.html)
 Configure the options for your tour, including whether to use a modal overlay, default step options such as styling and scrolling behavior, and a unique tour name
+
+## Examples
+For `options` and `steps` examples check the `examples` folder.
 
 ## Reusable shepherd across pages (Optional)
 If your tour needs to be displayed across multiple pages, consider using a reference container approach. Create a reference container within your Selfhelp system and load it with the Shepherd style as a child element on all pages where the tour is required.

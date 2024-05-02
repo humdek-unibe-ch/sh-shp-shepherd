@@ -1,0 +1,8 @@
+{
+    "useModalOverlay": true,
+    "defaultStepOptions": {
+      "classes": "shadow-md bg-purple-dark",
+      "scrollTo": true
+    },
+    "tourName": "shepherd-tour-name"
+  }

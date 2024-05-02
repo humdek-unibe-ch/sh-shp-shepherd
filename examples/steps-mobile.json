@@ -1,0 +1,605 @@
+[
+	{
+		"id": "step1",
+		"text": "This is your homepage",
+		"attachTo": {
+			"element": "ion-tab-button:first-child",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Next",
+				"action": "(function(){this.next(); $('.home-video')[0].play(); })"
+			}
+		]
+	},
+	{
+		"id": "step2",
+		"text": "Learn more about Self-regulated learning",
+		"attachTo": {
+			"element": ".home-video",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "(function(){this.back(); $('.home-video')[0].pause();})"
+			},
+			{
+				"text": "Next",
+				"action": "(function(){this.next(); $('.home-video')[0].pause();})"
+			}
+		]
+	},
+	{
+		"id": "step3",
+		"text": "To learn more about the project of studybuddy, you can click on the icon/image to visit our website",
+		"attachTo": {
+			"element": ".info-btn",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "(function(){this.back();$('.home-video')[0].play();})"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		]
+	},
+	{
+		"id": "step4",
+		"text": "To know more about your self-regulated learning, click on the icon/image",
+		"attachTo": {
+			"element": ".letsgo-btn",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		]
+	},
+	{
+		"id": "step5",
+		"text": "By clicking on “Hier”, you can contact us if you have any questions",
+		"attachTo": {
+			"element": ".support-text",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"canClickTarget": false,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "(function(){this.next();  $('#tab-button-tasks').click();})"
+			}
+		]
+	},
+	{
+		"id": "step6",
+		"text": "This is your Aufgaben page",
+		"attachTo": {
+			"element": "#tab-button-tasks",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "(function(){this.back();  $('#tab-button-home').click();})"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		]
+	},
+	{
+		"id": "step7",
+		"text": "Here you can enter your tasks or goals that you want to achieve, click next to enter your tasks!",
+		"attachTo": {
+			"element": ".task-btn",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"canClickTarget": false,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "(function(){this.next();  $('.task-btn')[0].click();})"
+			}
+		]
+	},
+	{
+		"id": "step8",
+		"text": "These are the instructions and an example of a task",
+		"attachTo": {
+			"element": ".task-examples",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "(function(){this.back();  $('ion-back-button')[0].click(); $('#tab-button-tasks').click();})"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		]
+	},
+	{
+		"id": "step9",
+		"text": "Write your task here!",
+		"attachTo": {
+			"element": ".task-name-input",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		],
+		"when": {
+			"show": "(function() {const vElement = this.getElement(); if (vElement) vElement.focus = () => { /* Do nothing */ };})"
+		}
+	},
+	{
+		"id": "step10",
+		"text": "Choose a color for your task",
+		"attachTo": {
+			"element": ".task-color-input",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		]
+	},
+	{
+		"id": "step11",
+		"text": "Set a due date for your task",
+		"attachTo": {
+			"element": ".task-due-date",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		]
+	},
+	{
+		"id": "step12",
+		"text": "Choose 'daily' for daily progress reminders or 'weekly' for weekly progress reminders.",
+		"attachTo": {
+			"element": ".task-reminder-frequency",
+			"on": "top"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		]
+	},
+	{
+		"id": "step13",
+		"text": "Select a specific hour for your reminder.",
+		"attachTo": {
+			"element": ".task-reminder-timeslot",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		]
+	},
+	{
+		"id": "step14",
+		"text": "Click Weiter gehts! to save your task",
+		"attachTo": {
+			"element": ".form-task ion-button:first-child",
+			"on": "bottom"
+		},
+		"canClickTarget": false,
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "(function(){this.next();  $('.form-task ion-button:first-child')[0].click();})"
+			}
+		]
+	},
+	{
+		"id": "step15",
+		"text": "Here you can break down your main tasks into subtasks, click next to enter your subtasks!",
+		"attachTo": {
+			"element": ".subtask-btn",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"canClickTarget": false,
+		"buttons": [
+			{
+				"text": "Next",
+				"action": "(function(){this.next();  $('.subtask-btn')[0].click();})"
+			}
+		]
+	},
+	{
+		"id": "step16",
+		"text": "Click on the dropdown menu and select a task you want to add subtasks to",
+		"attachTo": {
+			"element": ".subtask-task-id",
+			"on": "top"
+		},
+		"classes": "example-step-extra-class",
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "(function(){this.back();  $('ion-back-button')[0].click(); $('#tab-button-tasks').click();})"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		]
+	},
+	{
+		"id": "step17",
+		"text": "Write down your subtask",
+		"attachTo": {
+			"element": ".subtask-name",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		],
+		"when": {
+			"show": "(function() {const vElement = this.getElement(); if (vElement) vElement.focus = () => { /* Do nothing */ };})"
+		}
+	},
+	{
+		"id": "step18",
+		"text": "Click on “Weiter gehts” button to save your subtask.",
+		"attachTo": {
+			"element": ".form-subtask ion-button:first-child",
+			"on": "bottom"
+		},
+		"canClickTarget": false,
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "(function(){this.next();  $('.form-subtask ion-button:first-child')[0].click();})"
+			}
+		]
+	},
+	{
+		"id": "step20",
+		"text": "View your tasks here!",
+		"attachTo": {
+			"element": ".tasks-card",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		]
+	},
+	{
+		"id": "step21",
+		"text": "To edit a task, click the 'Bearbeiten' button.",
+		"attachTo": {
+			"element": ".task-edit-btn:first-child",
+			"on": "bottom"
+		},
+		"canClickTarget": false,
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		]
+	},
+	{
+		"id": "step22",
+		"text": "See your subtasks here. To edit or mark a subtask as complete, click 'Bearbeiten,' then turn on the 'Teilaufgabe erledigt' button and click 'Weiter gehts.'",
+		"attachTo": {
+			"element": ".subtasks",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		]
+	},
+	{
+		"id": "step23",
+		"text": "Navigate to your Dashboard by clicking on the corresponding button in the navigation bar",
+		"attachTo": {
+			"element": "#tab-button-StudyBuddy",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "(function(){this.next();  $('#tab-button-StudyBuddy').click();})"
+			}
+		]
+	},
+	{
+		"id": "step24",
+		"text": "Explore the Pie Chart to gain insights into your task performance. It showcases the overall progress percentage of all tasks. Hover over each segment to view specific progress percentages for individual tasks.",
+		"attachTo": {
+			"element": ".aster-chart-card",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "(function(){this.back();  $('#tab-button-StudyBuddy').click();})"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		]
+	},
+	{
+		"id": "step25",
+		"text": "Check the Progress Bar to track the remaining days until the deadline and monitor the progress percentage for each task.",
+		"attachTo": {
+			"element": ".progress-bar-holder:first-child",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		]
+	},
+	{
+		"id": "step26",
+		"text": "Navigate to your Unterstützung by clicking on the corresponding button in the navigation",
+		"attachTo": {
+			"element": "#tab-button-to_do_list",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"canClickTarget": false,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "(function(){this.next();  $('#tab-button-to_do_list').click();})"
+			}
+		]
+	},
+	{
+		"id": "step27",
+		"text": "Dive into the StrategieSammlung, where you'll find a variety of learning strategy videos to enhance your skill set. These videos are categorized into subfolders based on different areas of focus: Metakognition, Ressourcemanagement, Kognition, Motivation, and Emotion.",
+		"attachTo": {
+			"element": ".strategy-btn",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"canClickTarget": false,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "(function(){this.back();  $('#tab-button-to_do_list').click();})"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		]
+	},
+	{
+		"id": "step28",
+		"text": "If you encounter any difficulties, browse through our list of FAQs for potential solutions. If you can't find what you need there, feel free to reach out for further assistance using the support link on the homepage.",
+		"attachTo": {
+			"element": ".faq-btn",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"canClickTarget": false,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		]
+	},
+	{
+		"id": "step29",
+		"text": "Immerse yourself in the learning vignettes, where you can observe strategies being applied to tackle specific challenges.",
+		"attachTo": {
+			"element": ".learning-btn",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"canClickTarget": false,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "tour.next"
+			}
+		]
+	},
+	{
+		"id": "step30",
+		"canClickTarget": false,
+		"text": "click on the emergency button for immediate support in accomplishing your tasks",
+		"attachTo": {
+			"element": "ion-button.floating-btn",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "tour.back"
+			},
+			{
+				"text": "Next",
+				"action": "(function(){this.next();  $('.floating-btn')[0].click();})"
+			}
+		]
+	},
+	{
+		"id": "step31",
+		"text": "Select the area where you require assistance by carefully reading and choosing from the provided statements. This will guide you to complete a survey tailored to your needs, after which supporting strategies will be recommended",
+		"attachTo": {
+			"element": ".statements",
+			"on": "bottom"
+		},
+		"classes": "example-step-extra-class",
+		"scrollTo": true,
+		"buttons": [
+			{
+				"text": "Back",
+				"action": "(function(){this.back(); $('ion-back-button')[0].click(); $('#tab-button-to_do_list').click();})"
+			},
+			{
+				"text": "Complete",
+				"action": "tour.complete"
+			}
+		]
+	}
+]
