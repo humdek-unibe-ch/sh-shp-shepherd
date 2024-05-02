@@ -10,7 +10,7 @@ require_once __DIR__ . "/../../../../component/style/BaseStyleComponent.php";
 /**
  * The class to define the hooks for the plugin.
  */
-class ShepherdSHooks extends BaseHooks
+class ShepherdJSHooks extends BaseHooks
 {
     /* Constructors ***********************************************************/
 
@@ -56,6 +56,7 @@ class ShepherdSHooks extends BaseHooks
                 }
             }
         }
+        return false;
     }
 
     /* Public Methods *********************************************************/
@@ -91,7 +92,7 @@ class ShepherdSHooks extends BaseHooks
     /**
      * Get the plugin version
      */
-    public function get_plugin_db_version($plugin_name = 'lab-js')
+    public function get_plugin_db_version($plugin_name = 'shepherd-js')
     {
         return parent::get_plugin_db_version($plugin_name);
     }
