@@ -30,4 +30,4 @@ If your tour needs to be displayed across multiple pages, consider using a refer
 
 # Requirements
 
- - SelfHelp v6.12.1+
+ - SelfHelp v6.15.0+

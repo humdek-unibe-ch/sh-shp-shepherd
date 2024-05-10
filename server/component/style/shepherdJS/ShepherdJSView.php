@@ -91,6 +91,7 @@ class ShepherdJSView extends StyleView
         if ($state && $state['state']) {
             // load only the state, leave the rest, not needed now
             $style['state'] = $state['state'];
+            $style['state']['record_id'] = intval($state['record_id']);
         }
         return $style;
     }

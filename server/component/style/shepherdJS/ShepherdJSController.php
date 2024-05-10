@@ -25,7 +25,8 @@ class ShepherdJSController extends BaseController
     public function __construct($model)
     {
         parent::__construct($model);
-        if (isset($_POST['trigger_type']) && $_SESSION['id_user'] > 0) {
+        $condition = $model->calc_condition();
+        if ($condition['result'] && isset($_POST['trigger_type']) && $_SESSION['id_user'] > 0) {
             // save only if it is a logged in user
             $this->model->save_shepherd($_POST);
         }

@@ -1,4 +1,4 @@
-# v1.0.2
+# v1.0.2 (Require SelfHelp v6.15.0+)
 ### Bugfix
  - #6 - fix `view_once` and now it is properly detected if the tour is already done
 

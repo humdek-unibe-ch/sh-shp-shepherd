@@ -129,7 +129,8 @@ class ShepherdJSModel extends StyleModel
                 return $this->user_input->save_external_data(transactionBy_by_user, $shepherd_name, $data);
             } else {
                 $update_keys = array(
-                    "id_users" => $data['id_users']
+                    "id_users" => $data['id_users'],
+                    "tourName" => $data['tourName'],
                 );
                 if ($record_id > 0) {
                     // if there is a record_id we use it for the updating the data
