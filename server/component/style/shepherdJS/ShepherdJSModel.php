@@ -93,10 +93,10 @@ class ShepherdJSModel extends StyleModel
     public function get_shepherd_state()
     {
         $form_id = $this->user_input->get_form_id($this->get_form_name(), FORM_EXTERNAL);
-        if(!$form_id){
+        if (!$form_id) {
             return false;
         }
-        $res = $this->user_input->get_data($form_id, ' ORDER BY record_id DESC', true, FORM_EXTERNAL, $_SESSION['id_user'], true);
+        $res = $this->user_input->get_data($form_id, 'ORDER BY record_id DESC', true, FORM_EXTERNAL, $_SESSION['id_user'], true);
         if ($res && $res['tourName'] && $res[$res['tourName']]) {
             $res['state'] = json_decode($res[$res['tourName']], true);
             foreach ($res['state'] as $key => $value) {
@@ -122,13 +122,20 @@ class ShepherdJSModel extends StyleModel
             return false;
         }
         $shepherd_name = $this->get_form_name();
+        $record_id = $data['record_id'] ?? -1;
+        unset($data['record_id']); // remove the record_id from data once taken
         if (isset($data['trigger_type'])) {
-            if ($data['trigger_type'] == actionTriggerTypes_started) {
+            if ($data['trigger_type'] == actionTriggerTypes_started && $record_id == -1) {
                 return $this->user_input->save_external_data(transactionBy_by_user, $shepherd_name, $data);
             } else {
-                return $this->user_input->save_external_data(transactionBy_by_user, $shepherd_name, $data, array(
+                $update_keys = array(
                     "id_users" => $data['id_users']
-                ));
+                );
+                if ($record_id > 0) {
+                    // if there is a record_id we use it for the updating the data
+                    $update_keys['record_id'] = $record_id;
+                }
+                return $this->user_input->save_external_data(transactionBy_by_user, $shepherd_name, $data, $update_keys);
             }
         }
         return false;

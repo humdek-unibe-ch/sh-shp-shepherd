@@ -1,3 +1,7 @@
+# v1.0.2
+### Bugfix
+ - #6 - fix `view_once` and now it is properly detected if the tour is already done
+
 # v1.0.1
 ### Bugfix
  - properly load the shepherd plugin version

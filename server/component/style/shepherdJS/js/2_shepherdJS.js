@@ -26,6 +26,7 @@ function initShepherd(shepherd_element) {
         // use the one form DB, if it exist
         // use only the trigger_type, if it was finished;
         currentShepherdState['trigger_type'] = shepherd_data['state']['trigger_type'];
+        currentShepherdState['record_id'] = shepherd_data['state']['record_id'];
     }
     if (shepherd_data['show_once'] == "0" && currentShepherdState['trigger_type'] === 'finished') {
         // it was finished, but it can be done multiple times
@@ -35,7 +36,7 @@ function initShepherd(shepherd_element) {
             "trigger_type": "updated" // set it with status updated, because the entry is already in DB
         };
     }
-    if (shepherd_data['show_once'] == "1" && currentShepherdState['trigger_type'] === 'finished') {
+    if (shepherd_data['state'] && shepherd_data['show_once'] == "1" && currentShepherdState['trigger_type'] === 'finished') {
         return;
     }
     if (!shepherd_data['is_cms']) {
@@ -45,6 +46,7 @@ function initShepherd(shepherd_element) {
         }
         currentShepherdState['page_keyword'] = shepherd_data['page_keyword'];
         currentShepherdState['last_url'] = shepherd_data['last_url'];
+        currentShepherdState['id_users'] = shepherd_data['id_users'];        
         // if not cms load it
         const tour = new Shepherd.Tour(shepherd_data['options']);
         // load steps
@@ -118,4 +120,8 @@ function saveShepherdState(currentShepherdState) {
         url: window.location,
         data: currentShepherdState
     });
+    if (currentShepherdState['trigger_type'] == 'finished' && currentShepherdState['id_users'] > 1) {
+        // tour is finished, the user is logged in, remove the state from local storage. That will be check in the DB
+        window.localStorage.removeItem(currentShepherdState["tourName"]);
+    }
 }
